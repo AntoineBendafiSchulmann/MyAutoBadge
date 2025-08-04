@@ -28,6 +28,10 @@
                     Click="ManualBadgeButton_Click"
                     Height="40"
                     Margin="0,0,0,10"/>
+            <TextBlock Name="HolidayInfo"
+                       FontSize="13"
+                       Foreground="DarkOrange"
+                       Margin="0,0,0,10"/>
             <TextBlock Name="ManualBadgeStatus"
                        FontSize="13"
                        Foreground="DarkRed"

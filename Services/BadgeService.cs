@@ -58,7 +58,7 @@ public class BadgeService
             if (isWeekend)
                 _logger.LogInformation("Week-end détecté. Badge refusé car AllowWeekends = false");
             else
-                _logger.LogInformation("jour férié détecté, badgeage refusé");
+                _logger.LogInformation("jour férié ou jour de vacance détecté, badgeage refusé");
 
             return;
         }

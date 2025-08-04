@@ -32,6 +32,7 @@ public partial class MainWindow : Window
         AppendLog($"[info] prochain badgeage prévu à {next:HH\\:mm}");
 
         UpdateManualBadgeStatus();
+        UpdateHolidayInfo();
     }
 
     private async void ManualBadgeButton_Click(object sender, RoutedEventArgs e)
@@ -80,6 +81,7 @@ public partial class MainWindow : Window
         }
 
         UpdateManualBadgeStatus();
+        UpdateHolidayInfo();
     }
 
     private void UpdateManualBadgeStatus()
@@ -87,26 +89,50 @@ public partial class MainWindow : Window
         var now = DateTime.Now;
         var isInTimeRange = now.Hour >= _automationOptions.StartHour && now.Hour <= _automationOptions.EndHour;
         var isWeekend = now.DayOfWeek == DayOfWeek.Saturday || now.DayOfWeek == DayOfWeek.Sunday;
+        var isHoliday = App.AppHost.Services.GetRequiredService<HolidaysService>().IsTodayHoliday(now);
 
         if (!isInTimeRange)
         {
             ManualBadgeStatus.Text = $"badge manuel indisponible : hors horaires ({_automationOptions.StartHour}h–{_automationOptions.EndHour}h)";
             ManualBadgeButton.IsEnabled = false;
             ManualBadgeStatus.Foreground = System.Windows.Media.Brushes.DarkRed;
+            HolidayInfo.Text = "";
+            HolidayInfo.Visibility = Visibility.Collapsed;
         }
-        else if (!_allowWeekends && isWeekend)
+        else if (!_allowWeekends && (isWeekend || isHoliday))
         {
-            ManualBadgeStatus.Text = "badge manuel indisponible : week-end";
+            ManualBadgeStatus.Text = "";
             ManualBadgeButton.IsEnabled = false;
-            ManualBadgeStatus.Foreground = System.Windows.Media.Brushes.DarkRed;
+            HolidayInfo.Text = "jour férié ou jour de vacance détecté, badgeage refusé";
+            HolidayInfo.Visibility = Visibility.Visible;
         }
         else
         {
             ManualBadgeStatus.Text = "badge manuel disponible";
             ManualBadgeButton.IsEnabled = true;
             ManualBadgeStatus.Foreground = System.Windows.Media.Brushes.DarkGreen;
+            HolidayInfo.Text = "";
+            HolidayInfo.Visibility = Visibility.Collapsed;
         }
     }
+
+    private void UpdateHolidayInfo()
+    {
+        var now = DateTime.Now;
+        var isHoliday = App.AppHost.Services.GetRequiredService<HolidaysService>().IsTodayHoliday(now);
+
+        if (isHoliday)
+        {
+            HolidayInfo.Text = "jour férié ou jour de vacance détecté, badgeage refusé";
+            HolidayInfo.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            HolidayInfo.Text = "";
+            HolidayInfo.Visibility = Visibility.Collapsed;
+        }
+    }
+
 
     private void StopButton_Click(object sender, RoutedEventArgs e)
     {

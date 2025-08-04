@@ -4,8 +4,8 @@
 
 ## Fonctionnalités
 
-- Automatisation du badge quotidien à une heure définie
-- Possibilité de lancer un badge manuel
+- Automatisation du badgeage quotidien à une heure définie
+- Possibilité de lancer un badgeage manuel
 - Blocage configurable pendant les week-ends ou jours fériés
 - Interface utilisateur native en WPF
 - Configuration simple via `.env` et `appsettings.json`
@@ -54,12 +54,12 @@ dotnet run
 ## Structure
 
 - `MainWindow.xaml` : Interface utilisateur principale
-- `Services/` : Contient la logique de badge (`BadgeService`, `WebAutomationService`, etc.)
+- `Services/` : Contient la logique de badgeage (`BadgeService`, `WebAutomationService`, etc.)
 - `Models/` : Classes de configuration liées à `appsettings.json`
 - `Helpers/` : Calcul des jours fériés variables (ex. Pâques)
 
 ## Sécurité et confidentialité
 
-- Les informations sensibles comme l’URL de badge sont placées dans un fichier `.env` (non versionné).
+- Les informations sensibles comme l’URL de badgeage sont placées dans un fichier `.env` (non versionné).
 - Aucun élément confidentiel ou spécifique à une entreprise / un service particulier n’est contenu dans ce projet.
-- Aucune dépendance ou configuration n’est codée en dur dans ce projet.
+- Aucune dépendance ou configuration n’est codée en dur dans ce projet
