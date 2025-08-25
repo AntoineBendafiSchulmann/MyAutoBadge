@@ -17,6 +17,8 @@ public partial class App : Application
 
     public App()
     {
+        Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+
         Env.Load();
 
         AppHost = Host.CreateDefaultBuilder()

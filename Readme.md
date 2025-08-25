@@ -56,6 +56,7 @@ dotnet run
 Pour créer une version exécutable de l’application :
 
 ```bash
+dotnet clean
 dotnet publish -c Release
 ```
 
