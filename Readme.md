@@ -1,6 +1,6 @@
 # MyAutoBadge
 
-**MyAutoBadge** est une application WPF légère permettant d’automatiser des actions de badgeage web, avec interface native et configuration flexible
+**MyAutoBadge** est une application WPF permettant d’automatiser des actions de badgeage web, avec interface native et configuration flexible
 
 ## Fonctionnalités
 
@@ -49,6 +49,20 @@
 ```bash
 dotnet build
 dotnet run
+```
+
+## Générer un exécutable (mode production)
+
+Pour créer une version exécutable de l’application :
+
+```bash
+dotnet publish -c Release
+```
+
+L’exécutable sera disponible dans le dossier suivant :
+
+```bash
+bin\Release\net8.0-windows\publish\MyAutoBadge.exe
 ```
 
 ## Structure

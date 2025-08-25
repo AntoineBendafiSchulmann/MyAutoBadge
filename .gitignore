@@ -2,3 +2,4 @@
 /Logs/*.txt
 bin/
 obj/
+.vs/
